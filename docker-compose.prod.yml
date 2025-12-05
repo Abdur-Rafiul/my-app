@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   nextjs:
     container_name: my-app-prod
@@ -29,18 +27,6 @@ services:
       - web-root:/var/www/certbot
     depends_on:
       - nextjs
-    networks:
-      - app-network
-
-  certbot:
-    image: certbot/certbot:latest
-    container_name: certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - web-root:/var/www/certbot
-    depends_on:
-      - nginx
-    command: certonly --webroot --webroot-path=/var/www/certbot --email rafiul152265@gmail.com --agree-tos --no-eff-email -d hoopnetic.cloud -d www.hoopnetic.cloud --force-renewal
     networks:
       - app-network
 

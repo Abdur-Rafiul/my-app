@@ -3,8 +3,10 @@ FROM nginx:alpine
 # Remove default nginx config
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy our nginx config
-COPY nginx.conf /etc/nginx/conf.d/
+# Copy custom nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose ports
+# Create necessary directories
+RUN mkdir -p /var/www/certbot
+
 EXPOSE 80 443

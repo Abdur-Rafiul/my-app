@@ -15,7 +15,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: fatura-nginx
+    container_name: project-nginx
     restart: unless-stopped
     ports:
       - "80:80"

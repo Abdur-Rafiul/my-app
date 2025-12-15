@@ -1,19 +1,28 @@
 #!/bin/bash
-
-# Stop on error
 set -e
 
-echo "Deploying to production..."
+APP_NAME="project-next"
+COMPOSE_FILE="docker-compose.yml"
 
-# Pull latest changes (if using git on server)
-# git pull origin main
+echo "🚀 Starting local deployment of $APP_NAME"
 
-# Build and start containers
-echo "Building and starting containers..."
-docker compose -f docker-compose.prod.yml up -d --build
+echo "🛑 Stopping existing containers..."
+docker compose down
 
-# Prune unused images to save space
-echo "Cleaning up unused images..."
+echo "🔄 Rebuilding and starting containers..."
+docker compose up -d --build
+
+echo "🧹 Cleaning up old images..."
 docker image prune -f
 
-echo "Deployment complete! App is running on port 3000."
+echo "🏥 Checking application health..."
+sleep 10
+
+if curl -f http://localhost:3000 > /dev/null 2>&1; then
+    echo "✅ Deployment successful! Application is running at http://localhost:3000"
+else
+    echo "❌ Deployment failed! Application is not responding."
+    exit 1
+fi
+
+echo "🎉 Deployment completed successfully!"

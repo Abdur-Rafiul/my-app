@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker)" ]; then
   exit 1
 fi
 
-domains=(hoopnetic.cloud www.hoopnetic.cloud)
+domains=(hoopnetic.net www.hoopnetic.net)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="" # Adding a valid address is strongly recommended

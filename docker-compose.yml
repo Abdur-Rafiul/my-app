@@ -12,6 +12,14 @@ services:
       - /etc/localtime:/etc/localtime:ro
     networks:
       - project-next-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1024M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
 
   nginx:
     image: nginx:alpine
